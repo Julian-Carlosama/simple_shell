@@ -1,0 +1,58 @@
+B.\"Manpage for Simple Shell.
+.\"Created by Jessica Sabnabria & Julian Carlosama
+
+
+.TH SIMPLE_SHELL 1 “22 Agust 2021” “1.0” “Simple Shell Manual Page”
+
+
+
+.SH NAME
+
+
+
+Simple shell – the simple shell is a program executable that interpret commands.
+
+
+
+.SH SYNOPSYS
+
+.B hsh
+
+[options] [command string | file]
+
+
+.SH DESCRIPTION
+
+This simple shell will work same as shell with limited functionality. It means that the program will receive keyboard commands and passes them to the operating system to carry out. To initiate interactive mode, execute the Holberton shell executable. Then type in commands as you would in bash. hsh also provides a non-interactive mode where the user can pipe commands strings into hsh. When the simple shell is launched, it will start with dollar sign "$". This is called a shellprompt.
+
+. B Return Value,
+
+Return status value when user want to exit the shell.
+
+. B Programs and following commands will be handled:
+
+. B Commands located in PATH:
+
+ls [OPTION]: list directory contents
+
+pwd : print name of current/working directory.
+
+. B Built-in functions:
+
+cd [PATH]: change directory.
+
+exit [STATUS]: cause normal process termination.
+
+. B Handling Ctrl+c
+
+. B Handling Ctrl+D
+
+
+.SH AUTHORS
+
+Jessica Sanabria (3497@holbertonschool.com)
+Julian Carlosama (3392@holbertonschool.com)
+
+.SH COPYRIGHT
+
+Copyright © 2021 Open Source.
