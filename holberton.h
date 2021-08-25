@@ -38,6 +38,7 @@ typedef struct Shell
 	char **AllPaths;              /* Array de apuntadores: Todas las rutas */
 	char **argv;
 	char *BuildPath;
+        char **argvmain;
 
 	/* Métodos o function */
 	/* Check si estamos dentro una terminal o no */
@@ -71,5 +72,6 @@ void CopyPath(char *dest, char *src1, char *src2);
 int Execve2(shell *PtrShell);
 void NoInteractivo(shell *PtrShell);
 int BuildPath(shell *PtrShell);
+void freeAll(shell *PtrShell);
 
 #endif

@@ -104,13 +104,11 @@ void NoInteractivo(shell *PtrShell)
 	struct stat sb;
 
 	PtrShell->GetPATH(PtrShell);
-
-        if (((getline(&(PtrShell->lineptr), &(PtrShell->n), stdin)) != EOF)) {
-
+	if (((getline(&(PtrShell->lineptr), &(PtrShell->n), stdin)) != EOF))
+	{
 		if (StrCmp(PtrShell->lineptr, "exit") == 0)
 		{ /* Antes de salir Liberar memoria */
-			free(PtrShell->lineptr);
-			free(PtrShell->AllPaths);
+			freeAll(PtrShell);
 			exit(0);
 		} else if (StrCmp(PtrShell->lineptr, "env") == 0)
 			printENV(PtrShell->env);
@@ -118,26 +116,29 @@ void NoInteractivo(shell *PtrShell)
 		if ((PtrShell->argv)[0][0] == '/')
 		{
 			if (stat((PtrShell->argv)[0], &sb) == -1)
-				write(1, "Command not found\n", 18);
+			{
+				write(1, (PtrShell->argvmain)[0],
+					  len((PtrShell->argvmain)[0]));
+				write(1, "No such file or directory \n", 27);
+			}
 			else
 			{ Execve(PtrShell);
 				free(PtrShell->BuildPath);
 				PtrShell->BuildPath = NULL;
 			}
 		} else
-		{
-			/* ls ---> /bin/ls */
+		{/* ls ---> /bin/ls */
 			if (BuildPath(PtrShell) == 0)
 			{ Execve2(PtrShell);
 				free(PtrShell->BuildPath);
 			} else
-				write(1, "Command not found\n", 18);
+				write(1, "No such file or directory \n", 27);
 		}
 		if (PtrShell->argv != NULL)
 		{ free(PtrShell->argv);
 			PtrShell->argv = NULL;
 		}
-	}free(PtrShell->lineptr);
+	} free(PtrShell->lineptr);
 	free(PtrShell->AllPaths);
 }
 
@@ -179,6 +180,6 @@ void InitShell(shell *PtrShell, char **env)
 	PtrShell->Terminal = Terminal;
 	PtrShell->Interactivo = Interactivo;
 	PtrShell->GetPATH = GetPATH;
-        PtrShell->NoInteractivo = NoInteractivo;
+		PtrShell->NoInteractivo = NoInteractivo;
 
 }

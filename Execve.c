@@ -23,9 +23,9 @@ int Execve(shell *PtrShell)
 		if (state == -1)
 		{
 			write(1, "Command not found\n", 18);
-			free(PtrShell->lineptr);
-			free(PtrShell->AllPaths);
+			freeAll(PtrShell);
 			free(PtrShell->argv);
+
 			exit(0);
 		}
 	}

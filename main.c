@@ -15,15 +15,16 @@ int main(int argc, char **argv, char **env)
 
 	shell VShell;
 	(void) argc;
-	(void) argv;
+	VShell.argvmain = argv;
 
 	InitShell(&VShell, env);              /* inicializamos la estructura */
 
 	if (!(VShell.Terminal)())                 /* Modo no interactivo*/
-                NoInteractivo(&VShell);
+		NoInteractivo(&VShell);
 	else
 	{                                     /* Modo interactivo */
 		(VShell.Interactivo)(&VShell);
 	}
+	free(VShell.argv);
 	return (0);
 }
