@@ -92,6 +92,56 @@ void Interactivo(shell *PtrShell)
 }
 
 /**
+ * NoInteractivo - Interactive mode
+ *
+ * @PtrShell: Pointer to the struct of data
+ *
+ * Return: void
+ */
+/* Modo interactivo */
+void NoInteractivo(shell *PtrShell)
+{
+	struct stat sb;
+
+	PtrShell->GetPATH(PtrShell);
+
+        if (((getline(&(PtrShell->lineptr), &(PtrShell->n), stdin)) != EOF)) {
+
+		if (StrCmp(PtrShell->lineptr, "exit") == 0)
+		{ /* Antes de salir Liberar memoria */
+			free(PtrShell->lineptr);
+			free(PtrShell->AllPaths);
+			exit(0);
+		} else if (StrCmp(PtrShell->lineptr, "env") == 0)
+			printENV(PtrShell->env);
+		BuildArgs(PtrShell); /* Obtenemos he inicialzamos el array de lineprt */
+		if ((PtrShell->argv)[0][0] == '/')
+		{
+			if (stat((PtrShell->argv)[0], &sb) == -1)
+				write(1, "Command not found\n", 18);
+			else
+			{ Execve(PtrShell);
+				free(PtrShell->BuildPath);
+				PtrShell->BuildPath = NULL;
+			}
+		} else
+		{
+			/* ls ---> /bin/ls */
+			if (BuildPath(PtrShell) == 0)
+			{ Execve2(PtrShell);
+				free(PtrShell->BuildPath);
+			} else
+				write(1, "Command not found\n", 18);
+		}
+		if (PtrShell->argv != NULL)
+		{ free(PtrShell->argv);
+			PtrShell->argv = NULL;
+		}
+	}free(PtrShell->lineptr);
+	free(PtrShell->AllPaths);
+}
+
+/**
  * Terminal - Functions that define a terminal
  *
  * Return: Process suscessfull
@@ -129,4 +179,6 @@ void InitShell(shell *PtrShell, char **env)
 	PtrShell->Terminal = Terminal;
 	PtrShell->Interactivo = Interactivo;
 	PtrShell->GetPATH = GetPATH;
+        PtrShell->NoInteractivo = NoInteractivo;
+
 }

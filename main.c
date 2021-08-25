@@ -19,8 +19,8 @@ int main(int argc, char **argv, char **env)
 
 	InitShell(&VShell, env);              /* inicializamos la estructura */
 
-	if (!(VShell.Terminal)())                  /* Modo no interactivo*/
-		puts("No\n");
+	if (!(VShell.Terminal)())                 /* Modo no interactivo*/
+                NoInteractivo(&VShell);
 	else
 	{                                     /* Modo interactivo */
 		(VShell.Interactivo)(&VShell);

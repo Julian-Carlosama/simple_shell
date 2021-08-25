@@ -24,6 +24,7 @@
  * @Terminal: Pointer to the terminal
  * @Interactivo: Pointer to the interactive mode
  * @GetPATH: Pointer to get the path
+ * @BuildPath: Build our path
  */
 typedef struct Shell
 {
@@ -43,6 +44,7 @@ typedef struct Shell
 	int (*Terminal)(void);
 	void (*Interactivo)(struct Shell *PtrShell);/* Modo interactivo de la shell */
 	void (*GetPATH)(struct Shell *PtrShell);        /* Obtenemos el PATH */
+        void (*NoInteractivo)(struct Shell *PtrShell);
 } shell;
 
 /**
@@ -67,5 +69,7 @@ void printENV(char **env);
 int len(char *string);
 void CopyPath(char *dest, char *src1, char *src2);
 int Execve2(shell *PtrShell);
+void NoInteractivo(shell *PtrShell);
+int BuildPath(shell *PtrShell);
 
 #endif
