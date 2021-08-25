@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "holberton.h"
 
 /**
  * InitArrayPaths - Function that init the pointers to the arrays
