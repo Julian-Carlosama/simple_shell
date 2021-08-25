@@ -1,5 +1,5 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef HOLBERTON_H
+#define HOLBERTON_H
 #define IN 1 /* inside a word */
 #define OUT 0 /* outside a word */
 
