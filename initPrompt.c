@@ -54,7 +54,7 @@ void Interactivo(shell *PtrShell)
 	PtrShell->GetPATH(PtrShell);
 	while (write(1, "$ ", 2) &&
 	((getline(&(PtrShell->lineptr), &(PtrShell->n), stdin)) != EOF))
-	{
+	{ signal(SIGINT, signalCtrC);
 		if ((LineIsSapce(PtrShell->lineptr) == 1) || *(PtrShell->lineptr) == '\n')
 			continue;
 		if (StrCmp(PtrShell->lineptr, "exit") == 0)

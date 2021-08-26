@@ -25,6 +25,8 @@
  * @Interactivo: Pointer to the interactive mode
  * @GetPATH: Pointer to get the path
  * @BuildPath: Build our path
+ * @argvmain: Pointer to the no interactive mode
+ * @NoInteractivo: Pointer to the no interactive mode
  */
 typedef struct Shell
 {
@@ -38,14 +40,14 @@ typedef struct Shell
 	char **AllPaths;              /* Array de apuntadores: Todas las rutas */
 	char **argv;
 	char *BuildPath;
-        char **argvmain;
+	char **argvmain;
 
 	/* Métodos o function */
 	/* Check si estamos dentro una terminal o no */
 	int (*Terminal)(void);
 	void (*Interactivo)(struct Shell *PtrShell);/* Modo interactivo de la shell */
 	void (*GetPATH)(struct Shell *PtrShell);        /* Obtenemos el PATH */
-        void (*NoInteractivo)(struct Shell *PtrShell);
+	void (*NoInteractivo)(struct Shell *PtrShell);
 } shell;
 
 /**
@@ -73,5 +75,6 @@ int Execve2(shell *PtrShell);
 void NoInteractivo(shell *PtrShell);
 int BuildPath(shell *PtrShell);
 void freeAll(shell *PtrShell);
+void signalCtrC(int signal);
 
 #endif
