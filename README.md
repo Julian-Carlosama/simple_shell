@@ -114,7 +114,7 @@ $ echo "pwd" | ./hsh
 <h3> Flowchart <h3>
 
 <li><a href="https://drive.google.com/file/d/1DK2C1q0z_HP52qrHGh80zFD4yX-uLGiz/view?usp=sharing">Flowchart</a></li>
-<img alt="mj" src="https://drive.google.com/file/d/1DK2C1q0z_HP52qrHGh80zFD4yX-uLGiz/view?usp=sharing" class="small"></a>
+<img src="https://drive.google.com/file/d/1DK2C1q0z_HP52qrHGh80zFD4yX-uLGiz/view" class="small"></a>
 
 
 <h3> Authors <h3>
