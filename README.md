@@ -8,7 +8,7 @@
 <p>A Unix shell is a command-line interpreter or shell that provides a command line user interface for Unix-like operating systems. The shell is both an interactive command language and a scripting language, and is used by the operating system to control the execution of the system using shell scripts.</p>
 
 
-<h3> Instructions🚀 <h3> ok
+<h3> Instructions🚀 <h3>
 
 <p>To download the SHELL and run it first they should follow these steps:</p>
 
@@ -113,9 +113,8 @@ $ echo "pwd" | ./hsh
 
 <h3> Flowchart <h3>
 
-<img https://drive.google.com/file/d/1DK2C1q0z_HP52qrHGh80zFD4yX-uLGiz/view</a>
+<li><a href="https://drive.google.com/file/d/1DK2C1q0z_HP52qrHGh80zFD4yX-uLGiz/view?usp=sharing">Flowchart</a></li>
 
-https://drive.google.com/file/d/1DK2C1q0z_HP52qrHGh80zFD4yX-uLGiz/view?usp=sharing
 
 <h3> Authors <h3>
 
