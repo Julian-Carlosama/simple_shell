@@ -39,11 +39,11 @@ pwd : print name of current/working directory.
 
 . B Built-in functions:
 
-cd [PATH]: change directory.
+whereis [OPTION]: Shows the path where the command is located.
 
 exit [STATUS]: cause normal process termination.
 
-. B Handling Ctrl+c
+. B Handling Ctrl+C
 
 . B Handling Ctrl+D
 
