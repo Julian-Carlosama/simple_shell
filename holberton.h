@@ -76,5 +76,6 @@ void NoInteractivo(shell *PtrShell);
 int BuildPath(shell *PtrShell);
 void freeAll(shell *PtrShell);
 void signalCtrC(int signal);
+void Writer(shell *PtrShell);
 
 #endif

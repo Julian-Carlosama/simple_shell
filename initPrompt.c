@@ -39,6 +39,8 @@ int BuildPath(shell *PtrShell)
 	return (1);
 }
 
+
+
 /**
  * Interactivo - Interactive mode
  *
@@ -59,8 +61,7 @@ void Interactivo(shell *PtrShell)
 			continue;
 		if (StrCmp(PtrShell->lineptr, "exit") == 0)
 		{ /* Antes de salir Liberar memoria */
-			free(PtrShell->lineptr);
-			free(PtrShell->AllPaths);
+			free(PtrShell->lineptr), free(PtrShell->AllPaths);
 			exit(0);
 		} else if (StrCmp(PtrShell->lineptr, "env") == 0)
 			printENV(PtrShell->env);
@@ -68,20 +69,18 @@ void Interactivo(shell *PtrShell)
 		if ((PtrShell->argv)[0][0] == '/')
 		{
 			if (stat((PtrShell->argv)[0], &sb) == -1)
-				write(1, "Command not found\n", 18);
+				Writer(PtrShell);
 			else
 			{ Execve(PtrShell);
-				free(PtrShell->BuildPath);
-				PtrShell->BuildPath = NULL;
+				free(PtrShell->BuildPath), PtrShell->BuildPath = NULL;
 			}
 		} else
 		{
-			/* ls ---> /bin/ls */
 			if (BuildPath(PtrShell) == 0)
 			{ Execve2(PtrShell);
 				free(PtrShell->BuildPath);
 			} else
-				write(1, "Command not found\n", 18);
+				Writer(PtrShell);
 		}
 		if (PtrShell->argv != NULL)
 		{ free(PtrShell->argv);
@@ -104,11 +103,14 @@ void NoInteractivo(shell *PtrShell)
 	struct stat sb;
 
 	PtrShell->GetPATH(PtrShell);
-	if (((getline(&(PtrShell->lineptr), &(PtrShell->n), stdin)) != EOF))
-	{
+	while (((getline(&(PtrShell->lineptr), &(PtrShell->n), stdin)) != EOF))
+	{ signal(SIGINT, signalCtrC);
+		if ((LineIsSapce(PtrShell->lineptr) == 1) || *(PtrShell->lineptr) == '\n')
+			continue;
 		if (StrCmp(PtrShell->lineptr, "exit") == 0)
 		{ /* Antes de salir Liberar memoria */
-			freeAll(PtrShell);
+			free(PtrShell->lineptr);
+			free(PtrShell->AllPaths);
 			exit(0);
 		} else if (StrCmp(PtrShell->lineptr, "env") == 0)
 			printENV(PtrShell->env);
@@ -116,23 +118,20 @@ void NoInteractivo(shell *PtrShell)
 		if ((PtrShell->argv)[0][0] == '/')
 		{
 			if (stat((PtrShell->argv)[0], &sb) == -1)
-			{
-				write(1, (PtrShell->argvmain)[0],
-					  len((PtrShell->argvmain)[0]));
-				write(1, "No such file or directory \n", 27);
-			}
+				Writer(PtrShell);
 			else
 			{ Execve(PtrShell);
 				free(PtrShell->BuildPath);
 				PtrShell->BuildPath = NULL;
 			}
 		} else
-		{/* ls ---> /bin/ls */
+		{
+			/* ls ---> /bin/ls */
 			if (BuildPath(PtrShell) == 0)
 			{ Execve2(PtrShell);
 				free(PtrShell->BuildPath);
 			} else
-				write(1, "No such file or directory \n", 27);
+				Writer(PtrShell);
 		}
 		if (PtrShell->argv != NULL)
 		{ free(PtrShell->argv);
@@ -180,6 +179,6 @@ void InitShell(shell *PtrShell, char **env)
 	PtrShell->Terminal = Terminal;
 	PtrShell->Interactivo = Interactivo;
 	PtrShell->GetPATH = GetPATH;
-		PtrShell->NoInteractivo = NoInteractivo;
+	PtrShell->NoInteractivo = NoInteractivo;
 
 }
